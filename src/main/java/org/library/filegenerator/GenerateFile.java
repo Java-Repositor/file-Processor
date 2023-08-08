@@ -27,9 +27,7 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 public class GenerateFile extends MapDataObjects {
 
-	FileUtility fileUtility = new FileUtility();
-	
-	
+	public FileUtility fileUtility = new FileUtility();
 
 	public static final String SPREADSHEET = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 	public static final String TEXT_CSV = "text/csv";
@@ -127,6 +125,8 @@ public class GenerateFile extends MapDataObjects {
 			} catch (IOException e) {
 				onFileException(response, "Unable to generate excel file  Error -" + e.getMessage());
 			}
+		} else {
+			throw new NullPointerException("Data cannot be null or empty");
 		}
 	}
 
