@@ -10,16 +10,18 @@ Utility class for generating and serving files in XLSX & CSV formats.
 
 ### Method:
 
-generateResponse(HttpServletResponse response, String fileName, Object data)
+I. **generateResponse**(HttpServletResponse response, String fileName, Object data)
 
 ### Descr: 
 Generates and serves the appropriate file format response based on input data
 
 ### Inputs:
 
-1.HttpServletResponse - import jakarta.servlet.http.HttpServletResponse
-2.fileName - String value (ex. sample.xlsx | sample.csv)
-3.Object data - data should be either List<classObject> | List <JsonString> | Map<>
+1. HttpServletResponse - import jakarta.servlet.http.HttpServletResponse
+
+2. fileName - String value (ex. sample.xlsx | sample.csv)
+
+3. Object data - data should be either List<classObject> | List <JsonString> | Map<>
 
 ### Output: 
 
@@ -31,7 +33,7 @@ Utility class for reading various file formats and converting data to a list of 
 
 ### Method:
 
-I. readFileAsList(InputStream inputFile, String fileName)
+I. **readFileAsList**(InputStream inputFile, String fileName)
 
 ### Descr:  
 
@@ -39,10 +41,11 @@ Reads data from an input stream and returns it as a list of map objects.
 
 ### Inputs:
 
-1.InputStream - Send the file as inputStream ex. Get the input stream from multipart body request using MulitpartBody.getInputStream()
-2.fileName - String value (ex. sample.xlsx | sample.csv) ex. Get the filename from multipart body using MulitpartBody.getOriginalFilename()
+1.  InputStream - Send the file as inputStream ex. Get the input stream from multipart body request using MulitpartBody.getInputStream()
 
-II. readFileFromPath(String path)
+2. fileName - String value (ex. sample.xlsx | sample.csv) ex. Get the filename from the multipart body using MulitpartBody.getOriginalFilename()
+
+II. **readFileFromPath**(String path)
 
 ### Descr: 
 
@@ -53,7 +56,9 @@ Reads data from the file from the local drive and returns it as a list of map ob
 1. Path - String path (ex: "path_to_generated_excel/sample.xlsx" |"path_to_generated_excel/sample.xlsx")
 
 
-NOTE:  Generated data from file will have camel case key (ex: if file contain SAMPLE_HEADER column header key will sampleHeader) same goes file generate (ex: sampleHeader => SAMPLE_HEADER )
+### NOTE:  
+
+Generated data from the file will have camel case key (ex: if the file contains one of the column names as **SAMPLE_HEADER**, header key will sampleHeader) same goes for file generate (ex: Key  sampleHeader => SAMPLE_HEADER)
 
 
 ## Example Programm
