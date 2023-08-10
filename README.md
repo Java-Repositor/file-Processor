@@ -1,19 +1,19 @@
 # File Generation and Reading Library
 
-This library provides utility classes for generating and serving files in different formats (Excel and CSV) and for reading files and converting data to a list of map objects.
+> ***This library provides utility classes for generating and serving files in different formats (Excel and CSV) and for reading files and converting data to a list of map objects.***
 
 ## Classes Overview
 
 ### GenerateFile.class
 
-Utility class for generating and serving files in XLSX & CSV formats.
+> ***Utility class for generating and serving files in XLSX & CSV formats.***
 
 ### Method:
 
 I. **generateResponse**(HttpServletResponse response, String fileName, Object data)
 
 ### Descr: 
-Generates and serves the appropriate file format response based on input data
+> ***Generates and serves the appropriate file format response based on input data***
 
 ### Inputs:
 
@@ -29,7 +29,7 @@ file (sample.xlsx | sample.csv)
 
 ### ReadFile.class
 
-Utility class for reading various file formats and converting data to a list of map objects.
+> ***Utility class for reading various file formats and converting data to a list of map objects.***
 
 ### Method:
 
@@ -37,7 +37,7 @@ I. **readFileAsList**(InputStream inputFile, String fileName)
 
 ### Descr:  
 
-Reads data from an input stream and returns it as a list of map objects.
+> ***Reads data from an input stream and returns it as a list of map objects.***
 
 ### Inputs:
 
@@ -49,27 +49,35 @@ II. **readFileFromPath**(String path)
 
 ### Descr: 
 
-Reads data from the file from the local drive and returns it as a list of map objects.
+> ***Reads data from the file from the local drive and returns it as a list of map objects.***
 
 ### Inputs:
 
 1. Path - String path (ex: "path_to_generated_excel/sample.xlsx" |"path_to_generated_excel/sample.xlsx")
 
-> ### NOTE
+ ### NOTE
 
-> Generated data from the file will have camel case key (ex: if the file contains one of the column names as **SAMPLE_HEADER**, header key will sampleHeader) same goes for file generate (ex: Key  sampleHeader => SAMPLE_HEADER)
+>  ***Generated data from the file will have camel case key (ex: if the file contains one of the column names as **SAMPLE_HEADER**, header key will sampleHeader) same goes for file generate (ex: Key  sampleHeader => SAMPLE_HEADER)***
 
 
 ## Example Programm
 
 import org.library.filegenerator.GenerateFile;
+
 import org.library.filereader.ReadFile;
+
 import org.library.mapper.MapDataObjects;
+
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
+
 import java.util.ArrayList;
+
 import java.util.HashMap;
+
 import java.util.List;
+
 import java.util.Map;
 
 public class FileProcessingExample {
