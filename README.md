@@ -55,10 +55,9 @@ Reads data from the file from the local drive and returns it as a list of map ob
 
 1. Path - String path (ex: "path_to_generated_excel/sample.xlsx" |"path_to_generated_excel/sample.xlsx")
 
+> ### NOTE
 
-### NOTE:  
-
-Generated data from the file will have camel case key (ex: if the file contains one of the column names as **SAMPLE_HEADER**, header key will sampleHeader) same goes for file generate (ex: Key  sampleHeader => SAMPLE_HEADER)
+> Generated data from the file will have camel case key (ex: if the file contains one of the column names as **SAMPLE_HEADER**, header key will sampleHeader) same goes for file generate (ex: Key  sampleHeader => SAMPLE_HEADER)
 
 
 ## Example Programm
