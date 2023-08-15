@@ -1,6 +1,6 @@
 # File Generation and Reading Library
 
-> ***This library provides utility classes for generating and serving files in different formats (Excel and CSV) and for reading files and converting data to a list of map objects.***
+> ***This library provides utility classes for generating and reading files in different formats (Excel and CSV).***
 
 ## Classes Overview
 
