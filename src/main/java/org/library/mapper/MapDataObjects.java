@@ -1,9 +1,12 @@
 package org.library.mapper;
 
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,13 +36,15 @@ public class MapDataObjects {
 	 *
 	 * @param data The input object.
 	 * @return A list of maps representing the data.
-	 * @throws JsonProcessingException  If there's an issue processing JSON data.
-	 * @throws IllegalArgumentException If there's an illegal argument.
-	 * @throws IllegalAccessException   If there's an illegal access attempt.
+	 * @throws IntrospectionException
+	 * @throws InvocationTargetException
+	 * @throws JsonProcessingException   If there's an issue processing JSON data.
+	 * @throws IllegalArgumentException  If there's an illegal argument.
+	 * @throws IllegalAccessException    If there's an illegal access attempt.
 	 */
 	@SuppressWarnings("unchecked")
-	protected List<Map<String, Object>> dataToMapObject(Object data)
-			throws JsonProcessingException, IllegalArgumentException, IllegalAccessException {
+	protected List<Map<String, Object>> dataToMapObject(Object data) throws JsonProcessingException,
+			IllegalArgumentException, IllegalAccessException, InvocationTargetException, IntrospectionException {
 		if (data instanceof List) {
 			return prepareMap((List<Object>) data);
 		} else if (data instanceof Map) {
@@ -56,16 +61,18 @@ public class MapDataObjects {
 	 *
 	 * @param data The input list of objects.
 	 * @return A list of maps representing the data.
-	 * @throws IllegalArgumentException If there's an illegal argument.
-	 * @throws IllegalAccessException   If there's an illegal access attempt.
-	 * @throws JsonProcessingException  If there's an issue processing JSON data.
+	 * @throws IllegalArgumentException  If there's an illegal argument.
+	 * @throws IllegalAccessException    If there's an illegal access attempt.
+	 * @throws JsonProcessingException   If there's an issue processing JSON data.
+	 * @throws IntrospectionException
+	 * @throws InvocationTargetException
 	 */
-	private List<Map<String, Object>> prepareMap(List<Object> data)
-			throws IllegalArgumentException, IllegalAccessException, JsonProcessingException {
+	private List<Map<String, Object>> prepareMap(List<Object> data) throws IllegalArgumentException,
+			IllegalAccessException, JsonProcessingException, InvocationTargetException, IntrospectionException {
 		List<Map<String, Object>> result = new ArrayList<>();
 
 		for (Object x : data) {
-			Map<String, Object> map = new HashMap<>();
+			Map<String, Object> map = new LinkedHashMap<>();
 
 			if (x instanceof String str) {
 				if (isValidJson(str)) {
@@ -88,14 +95,17 @@ public class MapDataObjects {
 	 * @param map    The map to store field values.
 	 * @param fields The fields to map.
 	 * @param x      The object containing field values.
-	 * @throws IllegalArgumentException If there's an illegal argument.
-	 * @throws IllegalAccessException   If there's an illegal access attempt.
+	 * @throws IllegalArgumentException  If there's an illegal argument.
+	 * @throws IllegalAccessException    If there's an illegal access attempt.
+	 * @throws IntrospectionException
+	 * @throws InvocationTargetException
 	 */
 	private void mapFields(Map<String, Object> map, Field[] fields, Object x)
-			throws IllegalArgumentException, IllegalAccessException {
+			throws IllegalArgumentException, IllegalAccessException, IntrospectionException, InvocationTargetException {
 		for (Field f : fields) {
-			f.setAccessible(true);
-			map.put(f.getName(), f.get(x));
+			PropertyDescriptor pd = new PropertyDescriptor(f.getName(), x.getClass());
+			Method getter = pd.getReadMethod();
+			map.put(f.getName(), getter.invoke(x));
 		}
 	}
 

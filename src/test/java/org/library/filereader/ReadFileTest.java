@@ -29,7 +29,6 @@ class ReadFileTest {
 	public void setup() {
 		MockitoAnnotations.openMocks(this);
 		readFile = new ReadFile();
-		readFile.fileUtility = fileUtility;
 	}
 
 	@Test

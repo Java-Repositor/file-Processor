@@ -36,7 +36,7 @@ import org.library.utility.FileUtility;
 
 public class ReadFile {
 
-	public FileUtility fileUtility = new FileUtility();
+	public static final FileUtility fileUtility = new FileUtility();
 
 	/**
 	 * Reads data from an input stream and returns it as a list of map objects.

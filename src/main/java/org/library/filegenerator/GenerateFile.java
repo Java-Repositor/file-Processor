@@ -1,7 +1,9 @@
 package org.library.filegenerator;
 
+import java.beans.IntrospectionException;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +29,7 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 public class GenerateFile extends MapDataObjects {
 
-	public FileUtility fileUtility = new FileUtility();
+	public static final FileUtility fileUtility = new FileUtility();
 
 	public static final String SPREADSHEET = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 	public static final String TEXT_CSV = "text/csv";
@@ -39,13 +41,16 @@ public class GenerateFile extends MapDataObjects {
 	 * @param response HttpServletResponse to send the generated file as a response.
 	 * @param fileName Desired filename of the generated file.
 	 * @param data     Data to be written to the file.
-	 * @throws IOException              If there's an issue with file generation or
-	 *                                  response.
-	 * @throws IllegalArgumentException If invalid arguments are passed.
-	 * @throws IllegalAccessException   If there's an issue accessing class fields.
+	 * @throws IntrospectionException
+	 * @throws InvocationTargetException
+	 * @throws IOException               If there's an issue with file generation or
+	 *                                   response.
+	 * @throws IllegalArgumentException  If invalid arguments are passed.
+	 * @throws IllegalAccessException    If there's an issue accessing class fields.
 	 */
 	public void generateResponse(HttpServletResponse response, String fileName, Object data)
-			throws IOException, IllegalArgumentException, IllegalAccessException {
+			throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, IntrospectionException,
+			IOException {
 
 		List<Map<String, Object>> values = dataToMapObject(data);
 		String fileType = fileUtility.getFileType(fileName);
@@ -172,7 +177,7 @@ public class GenerateFile extends MapDataObjects {
 	}
 
 	/**
-	 * Formats a column header from CamelCase to uppercase words separated by
+	 * Formats a column header from CamelCase to upper case words separated by
 	 * spaces.
 	 *
 	 * @param columnHeader Original column header.

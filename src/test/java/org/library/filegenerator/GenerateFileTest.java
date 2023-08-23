@@ -38,7 +38,6 @@ class GenerateFileTest {
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
 		generateFile = new GenerateFile();
-		generateFile.fileUtility = fileUtility;
 	}
 
 	@Test
